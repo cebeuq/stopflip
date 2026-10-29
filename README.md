@@ -3,16 +3,19 @@
 > Meaning-preserving adversarial attacks on a stop/continue safety-classifier
 > surrogate — and why they don't transfer to the real classifier.
 
-## The one-paragraph version
+## TL;DR
 
 A production safety classifier watches an AI agent's conversation and decides,
-at each step, whether to let it keep going (`ok`) or halt it (`STOP`). We don't
-have its weights — it's a black box we can only query. So we trained our own
-local copy (a "surrogate"), attacked that copy with tiny text edits that a human
-reader wouldn't notice, and checked whether the same edits also fool the real
-classifier. **They almost never do.** Out of 45 attacks that reliably flipped
-our surrogate, exactly one also flipped the real classifier. This repo is the
-code and the write-up of why.
+at each step, whether to let it keep going (`ok`) or halt it (`STOP`). It's a
+black box, so we trained our own local copy (a "surrogate"), attacked that copy
+with tiny meaning-preserving text edits, and checked whether the same edits also
+fool the real classifier.
+
+**They almost never do** — out of 45 attacks that reliably flipped our
+surrogate, exactly 1 also flipped the real classifier. Surrogate confidence
+turned out to be worthless as a transfer signal; what little transfers is
+*structural* (where and how the edit sits in the transcript), not margin-deep.
+This repo is the code and the full write-up.
 
 ## The pieces
 
